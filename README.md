@@ -12,30 +12,15 @@ AI assistants can generate thousands of lines of code in seconds, making human r
 
 GuardRail automates everything that can be verified deterministically, leaving human reviewers to focus exclusively on business intent, domain model correctness, and engineering judgment.
 
-                  ┌───────────────────────────────────┐
-                  │       Approved API Contract       │
-                  └─────────────────┬─────────────────┘
-                                    │ (Immutable Input)
-                                    ▼
-                  ┌───────────────────────────────────┐
-                  │    Automated Test Generation      │
-                  └─────────────────┬─────────────────┘
-                                    │
-                                    ▼
-                  ┌───────────────────────────────────┐
-                  │      AI Implementation Agent      │
-                  └─────────────────┬─────────────────┘
-                                    │
-                                    ▼
-              [FAIL]      ┌───────────────────┐
-         ┌────────────────┤   GuardRail Gate  ├────────────────┐
-         │                └───────────────────┘                │
-         ▼                                                     ▼
-┌──────────────────┐                                  ┌──────────────────┐
-│  Halt Pipeline   │                                  │   Human Review   │
-│  (Zero PR Noise) │                                  └──────────────────┘
-└──────────────────┘
-
+```mermaid
+flowchart TD
+    Contract[Approved API Contract] -->|Immutable Input| TestGen[Automated Test Generation]
+    TestGen --> Agent[AI Implementation Agent]
+    Agent --> Gate[GuardRail Gate]
+    
+    Gate -->|FAIL| Halt[Halt Pipeline<br>Zero PR Noise]
+    Gate -->|PASS| Review[Human Review]
+```
 ---
 
 ## Tech Stack and Architecture
@@ -48,11 +33,12 @@ GuardRail automates everything that can be verified deterministically, leaving h
 
 ### Component Dependencies
 
-  [ OpenAPI Contract ] ---> (Auto-Generates) ---> [ Controller Layer ]
-                                                       │
-                                                       ▼
-  [ Repository Layer ] <---  (Isolated Via)  <--- [ Service Layer ]
-
+```mermaid
+flowchart TD
+    Contract[OpenAPI Contract] -->|Auto-Generates| Controller[Controller Layer]
+    Controller --> Service[Service Layer]
+    Service -->|Isolated Via| Repository[Repository Layer]
+```
 ---
 
 ## Getting Started
