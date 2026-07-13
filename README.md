@@ -4,6 +4,8 @@ Deterministic verification for AI-assisted software development.
 
 GuardRail is a reference implementation of a contract-first, architecture-guarded verification pipeline. It demonstrates how to move deterministic code checks earlier into the development lifecycle, ensuring that AI coding agents (or developers) cannot introduce structural drift or break public API schemas - even if their code compiles perfectly.
 
+The practical implementation companion to my article: [The Green Avalanche: AI Can Generate Code Faster Than Humans Can Verify It](https://dev.to/prachi_a7bead19dbf02dc44e/the-green-avalanche-ai-can-generate-code-faster-than-humans-can-verify-it-3p3h).
+
 ---
 
 ## The Philosophy
